@@ -4,21 +4,30 @@ import styles from '../styles/styles.module.css'
 
 import noImage from '../assets/no-image.jpg'
 
-export const ProductImage = ({ img = '' }) => {
+export interface Props {
+    img?: string;
+    className?: string;
+    style?: React.CSSProperties
+}
 
-    const {product} = useContext(ProductContext)
+export const ProductImage = ({ img = '', className, style }: Props) => {
+
+    const { product } = useContext(ProductContext)
     let imgToShow: string;
 
-    if(img) {
+    if (img) {
         imgToShow = img;
-    }else if ( product.img){
+    } else if (product.img) {
         imgToShow = product.img;
-    }else{
+    } else {
         imgToShow = noImage;
     }
 
     return (
-        <img className={styles.productImg} src={imgToShow} alt='Product Image' />
+        <img className={`${styles.productImg} ${className} `}
+            style={style}
+            src={imgToShow} alt='Product Image'
+        />
     )
 
 }
